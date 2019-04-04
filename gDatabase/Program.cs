@@ -18,6 +18,7 @@ namespace ConsoleApp3
             Console.WriteLine(" Name and feature");
             for (int i = 0; i < count; i++)
             {
+                data.Add(new Dictionary<string, double>());
                 var name = Console.ReadLine();
                 var feature = double.Parse(Console.ReadLine());
 
