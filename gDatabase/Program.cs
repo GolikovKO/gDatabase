@@ -1,34 +1,70 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleApp3
 {
     class Program
     {
-        static void Main()
+        static List<Dictionary<string, double>> data = new List<Dictionary<string, double>>();
+
+        static void LoadFromFile()
         {
-            List<Dictionary<string, double>> data = new List<Dictionary<string, double>>();
+            Console.WriteLine(" Считываем файл.");
+            string read = @"D:\Dev\ex\try.txt";
 
-            Console.WriteLine(" How much");
-            var count = int.Parse(Console.ReadLine());
-
-            Console.WriteLine(" Name and feature");
-            for (int i = 0; i < count; i++)
+            Thread.Sleep(1000);
+            using (StreamReader sr = new StreamReader(read))
             {
-                data.Add(new Dictionary<string, double>());
-                var name = Console.ReadLine();
-                var feature = double.Parse(Console.ReadLine());
+                Console.WriteLine(sr.ReadToEnd());
+            }
+        }
 
-                data[i].Add(name, feature);
+        static void SaveToFile()
+        {
+            Console.WriteLine(" Укажите путь сохранения файла - диск, папка, название файла .txt:");
+            string save = Console.ReadLine(); // путь
+
+            using (StreamWriter sw = new StreamWriter(save, false, System.Text.Encoding.Default))
+            {
+                foreach (var dic in data)
+                {
+                    foreach (var item in dic)
+                    {
+                        sw.Write(item.Key   + "|");
+                        sw.Write(item.Value + "|");
+                    }
+                    sw.WriteLine();   
+                }
+            }
+        }
+
+        static void MakeNewDic()
+        {
+            Console.WriteLine();
+        }
+
+        static void Main()
+        {   // D:\Dev\ex\try.txt
+            Console.WriteLine(" Возможные операции:");
+            Console.WriteLine(" Записать базу данных в файл -   нажать 1.");
+            Console.WriteLine(" Считать базу данных в консоль - нажать 2.");
+            //data.Add(new Dictionary<string, double>());
+
+            int textInput = int.Parse(Console.ReadLine());
+
+            if (textInput == 1)
+            {
+                SaveToFile();
             }
 
-            for (int i = 0; i < count; i++)
+            if (textInput == 2)
             {
-                Console.WriteLine(data[i].Keys);
+                LoadFromFile();
             }
+            Console.ReadLine();
+
         }
     }
 }
