@@ -14,7 +14,6 @@ namespace ConsoleApp3
             Console.WriteLine(" Считываем файл.");
             string read = @"D:\Dev\ex\try.txt";
 
-            Thread.Sleep(1000);
             using (StreamReader sr = new StreamReader(read))
             {
                 Console.WriteLine(sr.ReadToEnd());
@@ -32,10 +31,10 @@ namespace ConsoleApp3
                 {
                     foreach (var item in dic)
                     {
-                        sw.Write(item.Key   + "|");
+                        sw.Write(item.Key + "|");
                         sw.Write(item.Value + "|");
                     }
-                    sw.WriteLine();   
+                    sw.WriteLine();
                 }
             }
         }
@@ -60,45 +59,71 @@ namespace ConsoleApp3
 
                 data[i].Add("model", model);
                 data[i].Add("price", price);
-                data[i].Add("cpu", cpu);              
-            }
-
-            Console.WriteLine();
-
-            for (int e = 0; e < count; e++)
-            {
-                foreach (var item in data[e])
-                {
-                    Console.Write(item.Key + item.Value);
-                }
-                Console.WriteLine();
+                data[i].Add("cpu", cpu);
             }
         }
 
+        static void Output()
+        {
+            Console.WriteLine();
+
+            for (int e = 0; e < data.Count; e++)
+            {
+                foreach (var item in data[e])
+                {
+                    Console.Write(item.Key + "|" + item.Value + "|");
+                }
+                Console.WriteLine();   
+            }
+        }
+
+        static void CloseConsole()
+        {
+            Console.WriteLine(" Вы точно хотите выйти? (Y/N)");
+            string answer = Console.ReadLine();
+
+            if (answer == "Y") Environment.Exit(0);
+        }
+
         static void Main()
-        {                                               // D:\Dev\ex\try.txt
+        {   // D:\Dev\ex\try.txt
             Console.WriteLine(" Возможные операции:");
+            Console.WriteLine(" Закрыть консоль              - нажать 0.");
             Console.WriteLine(" Записать базу данных в файл  - нажать 1.");
             Console.WriteLine(" Считать базу данных из файла - нажать 2.");
             Console.WriteLine(" Добавить новую запись в б/д  - нажать 3.");
+            Console.WriteLine(" Отобразить б/д в консоль     - нажать 4.");
 
-            int textInput = int.Parse(Console.ReadLine());
+            while (true)
 
-            if (textInput == 1)
             {
-                SaveToFile();
-            }
+                int textInput = int.Parse(Console.ReadLine());
 
-            if (textInput == 2)
-            {
-                LoadFromFile();
-            }
+                if (textInput == 0)
+                {
+                    CloseConsole();
+                }
 
-            if (textInput == 3)
-            {
-                MakeNewDic();
-            }
+                if (textInput == 1)
+                {
+                    SaveToFile();
+                }
 
+                if (textInput == 2)
+                {
+                    LoadFromFile();
+                }
+
+                if (textInput == 3)
+                {
+                    MakeNewDic();
+                }
+
+                if (textInput == 4)
+                {
+                    Output();
+                }
+            }
         }
     }
 }
