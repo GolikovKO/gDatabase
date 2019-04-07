@@ -42,30 +42,39 @@ namespace ConsoleApp3
 
         static void MakeNewDic()
         {
-            Console.WriteLine(" Имя модели:");
-            string name = Console.ReadLine();
+            Console.WriteLine(" Сколько позиций добавить?");
+            int count = int.Parse(Console.ReadLine());
 
-            Console.WriteLine(" Цена:");
-            string feature = Console.ReadLine();
-
-            Console.WriteLine(" Процессор:");
-            string cpu = Console.ReadLine();
-
-            data.Add(new Dictionary<string, string>());
-
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < count; i++)
             {
-                data[i].Add("1 ", name);
-                data[i].Add("2 ", feature);
-                data[i].Add("3 ", cpu);
+                data.Add(new Dictionary<string, string>());
+
+                Console.WriteLine(" Имя модели:");
+                string model = Console.ReadLine();
+
+                Console.WriteLine(" Цена:");
+                string price = Console.ReadLine();
+
+                Console.WriteLine(" Процессор:");
+                string cpu = Console.ReadLine();
+
+                for (int z = 0; z < count; z++)
+                {
+                    data[z].Add("model|", model + "|");
+                    data[z].Add("price|", price + "|");
+                    data[z].Add("cpu|"  , cpu        );
+                }               
             }
 
-            for (int i = 0; i < 1; i++)
+            Console.WriteLine();
+
+            for (int e = 0; e < count; e++)
             {
-                foreach (var item in data[i])
+                foreach (var item in data[e])
                 {
-                    Console.WriteLine(item.Key + item.Value);
+                    Console.Write(item.Key + item.Value);
                 }
+                Console.WriteLine();
             }
         }
 
