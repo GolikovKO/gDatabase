@@ -58,12 +58,9 @@ namespace ConsoleApp3
                 Console.WriteLine(" Процессор:");
                 string cpu = Console.ReadLine();
 
-                for (int z = 0; z < count; z++)
-                {
-                    data[z].Add("model|", model + "|");
-                    data[z].Add("price|", price + "|");
-                    data[z].Add("cpu|"  , cpu        );
-                }               
+                data[i].Add("model", model);
+                data[i].Add("price", price);
+                data[i].Add("cpu", cpu);              
             }
 
             Console.WriteLine();
