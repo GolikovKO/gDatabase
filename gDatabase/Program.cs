@@ -14,9 +14,15 @@ namespace ConsoleApp3
             Console.WriteLine(" Считываем файл.");
             string read = @"D:\Dev\ex\try.txt";
 
-            using (StreamReader sr = new StreamReader(read))
+            using (StreamReader sr = new StreamReader(read, System.Text.Encoding.Default))
             {
-                Console.WriteLine(sr.ReadToEnd());
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+
+                }
             }
         }
 
@@ -33,7 +39,7 @@ namespace ConsoleApp3
                     {
                         sw.Write(item.Key + "|");
                         sw.Write(item.Value + "|");
-                    }
+                    }                    
                     sw.WriteLine();
                 }
             }
@@ -60,6 +66,8 @@ namespace ConsoleApp3
                 data[i].Add("model", model);
                 data[i].Add("price", price);
                 data[i].Add("cpu", cpu);
+
+                Console.WriteLine(" Success.");
             }
         }
 
@@ -87,6 +95,12 @@ namespace ConsoleApp3
 
         static void Main()
         {   // D:\Dev\ex\try.txt
+            // Вывод листа словарей в виде таблицы
+            // Удаление словаря по индексу из листа
+            // Изменение словаря по индексу из листа
+            // Изменение хар-ки словаря по индексу
+            // Добавление хар-ки в словарь
+            // Удаление хар-ки из словаря
             Console.WriteLine(" Возможные операции:");
             Console.WriteLine(" Закрыть консоль              - нажать 0.");
             Console.WriteLine(" Записать базу данных в файл  - нажать 1.");
