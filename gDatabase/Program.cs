@@ -20,8 +20,60 @@ namespace ConsoleApp3
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine(line);
+                    string model = " ";
+                    string price = " ";
+                    string cpu = " ";
 
+                    string text = " ";
+                    string sentence = line;
+                    int countOfSlash = 0;
+
+                    for (int i = 6; i < sentence.Length; i++)
+                    {
+                        if (sentence[i] == '|')
+                        {
+                            countOfSlash += 1;
+
+                            if (countOfSlash == 1)
+                            {
+                                model = text;
+                                text = " ";
+                            }
+
+                            if (countOfSlash == 2)
+                            {
+                                text = " ";
+                            }
+
+                            if (countOfSlash == 3)
+                            {
+                                price = text;
+                                text = " ";
+                            }
+
+                            if (countOfSlash == 4)
+                            {
+                                text = " ";
+                            }
+
+                            if (countOfSlash == 5)
+                            {
+                                cpu = text;
+                                text = " ";
+                            }
+                        }
+                        else
+                        {
+                            text += sentence[i];
+                        }
+                    }
+
+                    int e = 1;
+                    data.Add(new Dictionary<string, string>());
+
+                    data[e].Add("model", model);
+                    data[e].Add("price", price);
+                    data[e].Add("cpu", cpu);
                 }
             }
         }
