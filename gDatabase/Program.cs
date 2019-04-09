@@ -14,66 +14,71 @@ namespace ConsoleApp3
             Console.WriteLine(" Считываем файл.");
             string read = @"D:\Dev\ex\try.txt";
 
+            int countOfLines = File.ReadAllLines(read).Length;
+
+           // Console.WriteLine(countOfLines);
+
             using (StreamReader sr = new StreamReader(read, System.Text.Encoding.Default))
             {
                 string line;
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    string model = " ";
-                    string price = " ";
-                    string cpu = " ";
-
-                    string text = " ";
-                    string sentence = line;
-                    int countOfSlash = 0;
-
-                    for (int i = 6; i < sentence.Length; i++)
+                    for (int u = 0; u < countOfLines; u++)
                     {
-                        if (sentence[i] == '|')
+                        string model = " ";
+                        string price = " ";
+                        string cpu = " ";
+
+                        string text = " ";
+                        string sentence = line;
+                        int countOfSlash = 0;
+
+                        for (int i = 6; i < sentence.Length; i++)
                         {
-                            countOfSlash += 1;
-
-                            if (countOfSlash == 1)
+                            if (sentence[i] == '|')
                             {
-                                model = text;
-                                text = " ";
+                                countOfSlash += 1;
+
+                                if (countOfSlash == 1)
+                                {
+                                    model = text;
+                                    text = " ";
+                                }
+
+                                if (countOfSlash == 2)
+                                {
+                                    text = " ";
+                                }
+
+                                if (countOfSlash == 3)
+                                {
+                                    price = text;
+                                    text = " ";
+                                }
+
+                                if (countOfSlash == 4)
+                                {
+                                    text = " ";
+                                }
+
+                                if (countOfSlash == 5)
+                                {
+                                    cpu = text;
+                                    text = " ";
+                                }
                             }
-
-                            if (countOfSlash == 2)
+                            else
                             {
-                                text = " ";
-                            }
-
-                            if (countOfSlash == 3)
-                            {
-                                price = text;
-                                text = " ";
-                            }
-
-                            if (countOfSlash == 4)
-                            {
-                                text = " ";
-                            }
-
-                            if (countOfSlash == 5)
-                            {
-                                cpu = text;
-                                text = " ";
+                                text += sentence[i];
                             }
                         }
-                        else
-                        {
-                            text += sentence[i];
-                        }
+                        data.Add(new Dictionary<string, string>());
+
+                        data[u].Add("model", model);
+                        data[u].Add("price", price);
+                        data[u].Add("cpu", cpu);
                     }
-
-                    int e = 1;
-                    data.Add(new Dictionary<string, string>());
-
-                    data[e].Add("model", model);
-                    data[e].Add("price", price);
-                    data[e].Add("cpu", cpu);
                 }
             }
         }
